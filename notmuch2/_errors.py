@@ -50,6 +50,12 @@ class NotmuchError(Exception):
                 PathError,
             capi.lib.NOTMUCH_STATUS_ILLEGAL_ARGUMENT:
                 IllegalArgumentError,
+            capi.lib.NOTMUCH_STATUS_NO_CONFIG:
+                NoConfigError,
+            capi.lib.NOTMUCH_STATUS_NO_DATABASE:
+                NoDatabaseError,
+            capi.lib.NOTMUCH_STATUS_DATABASE_EXISTS:
+                DatabaseExistsError,
         }
         return types[status]
 
@@ -94,7 +100,9 @@ class UnsupportedOperationError(NotmuchError): pass
 class UpgradeRequiredError(NotmuchError): pass
 class PathError(NotmuchError): pass
 class IllegalArgumentError(NotmuchError): pass
-
+class NoConfigError(NotmuchError): pass
+class NoDatabaseError(NotmuchError): pass
+class DatabaseExistsError(NotmuchError): pass
 
 class ObjectDestroyedError(NotmuchError):
     """The object has already been destroyed and it's memory freed.
