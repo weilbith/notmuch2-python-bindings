@@ -147,7 +147,7 @@ class Message(base.NotmuchObject):
         """Return an iterator of all files for this message.
 
         If multiple files contained the same message ID they will all
-        be returned here.  The files are returned as intances of
+        be returned here.  The files are returned as instances of
         :class:`pathlib.Path`.
 
         :returns: Iterator yielding :class:`pathlib.Path` instances.
@@ -357,14 +357,14 @@ class Message(base.NotmuchObject):
         This method will only work if the message was created from a
         thread.  Otherwise it will yield no results.
 
-        :returns: An iterator yielding :class:`Message` instances.
+        :returns: An iterator yielding :class:`OwnedMessage` instances.
         :rtype: MessageIter
         """
         # The notmuch_messages_valid call accepts NULL and this will
         # become an empty iterator, raising StopIteration immediately.
         # Hence no return value checking here.
         msgs_p = capi.lib.notmuch_message_get_replies(self._msg_p)
-        return MessageIter(self, msgs_p, db=self._db)
+        return MessageIter(self, msgs_p, db=self._db, msg_cls=OwnedMessage)
 
     def __hash__(self):
         return hash(self.messageid)
@@ -431,7 +431,7 @@ class PropertiesMap(base.NotmuchObject, collections.abc.MutableMapping):
     means the former will yield duplicate keys while the latter won't.
     It also means ``len(list(iter(this_map)))`` could be different
     than ``len(this_map.keys())``.  ``len(this_map)`` will correspond
-    with the lenght of the default iterator.
+    with the length of the default iterator.
 
     Be aware that libnotmuch exposes all of this as iterators, so
     quite a few operations have O(n) performance instead of the usual
