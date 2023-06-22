@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="notmuch2",
-    version="0.30",
+    version="0.31",
     description="Pythonic bindings for the notmuch mail database using CFFI",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
