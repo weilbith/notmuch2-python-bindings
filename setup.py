@@ -1,8 +1,11 @@
 import setuptools
 
+with open('version.txt') as fp:
+    VERSION = fp.read().strip()
+
 setuptools.setup(
     name='notmuch2',
-    version='0.31.3',
+    version=VERSION,
     description='Pythonic bindings for the notmuch mail database using CFFI',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
